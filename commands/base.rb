@@ -1,6 +1,8 @@
 module Commands
   class Base
+
     REGISTERED_COMMANDS = {}
+
     def initialize(robot, args)
       @args = args
 
