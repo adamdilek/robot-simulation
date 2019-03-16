@@ -1,5 +1,6 @@
 module Commands
   class Base
+    REGISTERED_COMMANDS = {}
     def initialize(robot, args)
       @args = args
 
@@ -20,6 +21,10 @@ module Commands
 
     def execute
       raise CustomErrors::MustBeImplemented
+    end
+
+    def self.register_command(command, klass)
+      REGISTERED_COMMANDS[command] = klass
     end
   end
 end

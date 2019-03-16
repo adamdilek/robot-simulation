@@ -15,4 +15,6 @@ module Commands
       raise ex
     end
   end
+
+  Commands::Base.register_command(Commands::Place.identifier, Commands::Place)
 end

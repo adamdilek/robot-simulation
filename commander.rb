@@ -10,20 +10,10 @@ class Commander
   end
 
   def run
-    klass = command_klass(@command)
+    klass = Commands::Base::REGISTERED_COMMANDS[@command]
 
     raise CustomErrors::InvalidCommand if klass.nil?
 
     klass.new(@robot, @args).execute
-  end
-
-  private
-
-  def command_klass(identifier)
-    Commands::Base.descendants.each do |kl|
-      return kl if kl.identifier == identifier
-    end
-
-    nil
   end
 end

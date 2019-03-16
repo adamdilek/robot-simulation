@@ -4,4 +4,6 @@ module Commands
       @robot.turn_right
     end
   end
+
+  Commands::Base.register_command(Commands::Right.identifier, Commands::Right)
 end
