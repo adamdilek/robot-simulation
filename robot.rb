@@ -20,10 +20,10 @@ class Robot
   private
 
   def move_forward_on_x
-    @position.x = @position.x + @position.f.forward
+    @position.x = @position.x + @position.f.forward_unit
   end
 
   def move_forward_on_y
-    @position.y = @position.y + @position.f.forward
+    @position.y = @position.y + @position.f.forward_unit
   end
 end

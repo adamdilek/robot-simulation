@@ -11,7 +11,7 @@ module Directions
         Directions::NORTH
       end
 
-      def forward
+      def forward_unit
         1
       end
 

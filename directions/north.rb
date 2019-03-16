@@ -9,7 +9,7 @@ module Directions
         Directions::WEST
       end
 
-      def forward
+      def forward_unit
         1
       end
 
