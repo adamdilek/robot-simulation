@@ -16,6 +16,8 @@
 
 Dir[File.join(File.dirname(__FILE__), "../*.rb")].each { |f| require f }
 
+Dir[File.join(__dir__, '../positions/facing/', '*.rb')].each { |file| require file }
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

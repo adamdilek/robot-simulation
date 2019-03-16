@@ -7,16 +7,34 @@ describe 'Commands' do
       it 'does not replace robot' do
         entry = Entry.new
 
-        entry.add_command('PLACE', '0', '0', 'NORTH')
-        entry.add_command('MOVE')
-        entry.add_command('MOVE')
-        entry.add_command('MOVE')
-        entry.add_command('RIGHT')
-        entry.add_command('MOVE')
+        entry.run_command('PLACE', '0', '0', 'NORTH')
+        entry.run_command('MOVE')
+        entry.run_command('MOVE')
+        entry.run_command('MOVE')
+        entry.run_command('RIGHT')
+        entry.run_command('MOVE')
 
-        entry.add_command('PLACE', '1', '1', 'WEST')
+        entry.run_command('PLACE', '1', '1', 'WEST')
 
-        expect(entry.add_command('REPORT')).to eq('Output: 1, 1, WEST')
+        expect(entry.run_command('REPORT')).to eq('Output: 1, 1, WEST')
+      end
+    end
+
+    context 'runs multiple with invalid args' do
+      it 'does not replace robot' do
+        entry = Entry.new
+
+        entry.run_command('PLACE', '1', '0', 'NORTH')
+
+        entry.run_command('MOVE')
+        entry.run_command('MOVE')
+        entry.run_command('MOVE')
+        entry.run_command('RIGHT')
+        entry.run_command('MOVE')
+
+        entry.run_command('PLACE', '1', '1', 'WEST')
+
+        expect(entry.run_command('REPORT')).to eq('Output: 1, 1, WEST')
       end
     end
 
@@ -24,7 +42,7 @@ describe 'Commands' do
       it 'it accepts another commands' do
         entry = Entry.new
 
-        expect { entry.add_command('MOVE') }.to raise_error(CustomErrors::PlaceRobot)
+        expect { entry.run_command('MOVE') }.to raise_error(CustomErrors::PlaceRobot)
       end
     end
 
@@ -32,25 +50,25 @@ describe 'Commands' do
       it 'runs with missing arguments' do
         entry = Entry.new
 
-        expect { entry.add_command('PLACE') }.to raise_error(CustomErrors::PlaceCommandMissingArgs)
+        expect { entry.run_command('PLACE') }.to raise_error(CustomErrors::PlaceCommandMissingArgs)
       end
 
       it 'it runs with invalid face position argument' do
         entry = Entry.new
 
-        expect { entry.add_command('PLACE', '1', '1', 'SOUTHWEST') }.to raise_error(CustomErrors::InvalidFacePosition)
+        expect { entry.run_command('PLACE', '1', '1', 'SOUTHWEST') }.to raise_error(CustomErrors::InvalidFacePosition)
       end
 
       it 'runs with invalid table position' do
         entry = Entry.new
 
-        expect { entry.add_command('PLACE', '6', '1', 'WEST') }.to raise_error(CustomErrors::RobotWillFallDown)
+        expect { entry.run_command('PLACE', '6', '1', 'WEST') }.to raise_error(CustomErrors::RobotWillFallDown)
       end
 
       it 'runs with invalid table position' do
         entry = Entry.new
 
-        expect { entry.add_command('PLACE', '1', '5', 'WEST') }.to raise_error(CustomErrors::RobotWillFallDown)
+        expect { entry.run_command('PLACE', '1', '5', 'WEST') }.to raise_error(CustomErrors::RobotWillFallDown)
       end
     end
   end
@@ -60,11 +78,11 @@ describe 'Commands' do
     it 'does not move the robot' do
       entry = Entry.new
 
-      entry.add_command('PLACE', '0', '0', 'NORTH')
+      entry.run_command('PLACE', '0', '0', 'NORTH')
 
-      entry.add_command('MOVE')
+      entry.run_command('MOVE')
 
-      expect(entry.add_command('REPORT')).to eq('Output: 0, 1, NORTH')
+      expect(entry.run_command('REPORT')).to eq('Output: 0, 1, NORTH')
     end
 
     context 'when robot on the WEST edge' do
@@ -74,9 +92,9 @@ describe 'Commands' do
         it 'robot does not fall down' do
           entry = Entry.new
 
-          entry.add_command('PLACE', '0', '0', 'WEST')
+          entry.run_command('PLACE', '0', '0', 'WEST')
 
-          expect { entry.add_command('MOVE') }.to raise_error(CustomErrors::RobotWillFallDown)
+          expect { entry.run_command('MOVE') }.to raise_error(CustomErrors::RobotWillFallDown)
         end
       end
     end
@@ -88,9 +106,9 @@ describe 'Commands' do
         it 'robot does not fall down' do
           entry = Entry.new
 
-          entry.add_command('PLACE', '0', '4', 'NORTH')
+          entry.run_command('PLACE', '0', '4', 'NORTH')
 
-          expect { entry.add_command('MOVE') }.to raise_error(CustomErrors::RobotWillFallDown)
+          expect { entry.run_command('MOVE') }.to raise_error(CustomErrors::RobotWillFallDown)
         end
       end
     end
@@ -102,9 +120,9 @@ describe 'Commands' do
         it 'robot does not fall down' do
           entry = Entry.new
 
-          entry.add_command('PLACE', '4', '0', 'EAST')
+          entry.run_command('PLACE', '4', '0', 'EAST')
 
-          expect { entry.add_command('MOVE') }.to raise_error(CustomErrors::RobotWillFallDown)
+          expect { entry.run_command('MOVE') }.to raise_error(CustomErrors::RobotWillFallDown)
         end
       end
     end
@@ -116,9 +134,9 @@ describe 'Commands' do
         it 'robot does not fall down' do
           entry = Entry.new
 
-          entry.add_command('PLACE', '0', '0', 'SOUTH')
+          entry.run_command('PLACE', '0', '0', 'SOUTH')
 
-          expect { entry.add_command('MOVE') }.to raise_error(CustomErrors::RobotWillFallDown)
+          expect { entry.run_command('MOVE') }.to raise_error(CustomErrors::RobotWillFallDown)
         end
       end
     end
@@ -130,11 +148,11 @@ describe 'Commands' do
       it 'does not turn robot to WEST' do
         entry = Entry.new
 
-        entry.add_command('PLACE', '0', '0', 'NORTH')
+        entry.run_command('PLACE', '0', '0', 'NORTH')
 
-        entry.add_command('LEFT')
+        entry.run_command('LEFT')
 
-        expect(entry.add_command('REPORT')).to eq('Output: 0, 0, WEST')
+        expect(entry.run_command('REPORT')).to eq('Output: 0, 0, WEST')
       end
     end
 
@@ -142,11 +160,11 @@ describe 'Commands' do
       it 'does not turn robot to NORTH' do
         entry = Entry.new
 
-        entry.add_command('PLACE', '0', '0', 'EAST')
+        entry.run_command('PLACE', '0', '0', 'EAST')
 
-        entry.add_command('LEFT')
+        entry.run_command('LEFT')
 
-        expect(entry.add_command('REPORT')).to eq('Output: 0, 0, NORTH')
+        expect(entry.run_command('REPORT')).to eq('Output: 0, 0, NORTH')
       end
     end
 
@@ -154,11 +172,11 @@ describe 'Commands' do
       it 'does not turn robot to EAST' do
         entry = Entry.new
 
-        entry.add_command('PLACE', '0', '0', 'SOUTH')
+        entry.run_command('PLACE', '0', '0', 'SOUTH')
 
-        entry.add_command('LEFT')
+        entry.run_command('LEFT')
 
-        expect(entry.add_command('REPORT')).to eq('Output: 0, 0, EAST')
+        expect(entry.run_command('REPORT')).to eq('Output: 0, 0, EAST')
       end
     end
 
@@ -166,11 +184,11 @@ describe 'Commands' do
       it 'does not turn robot to SOUTH' do
         entry = Entry.new
 
-        entry.add_command('PLACE', '0', '0', 'WEST')
+        entry.run_command('PLACE', '0', '0', 'WEST')
 
-        entry.add_command('LEFT')
+        entry.run_command('LEFT')
 
-        expect(entry.add_command('REPORT')).to eq('Output: 0, 0, SOUTH')
+        expect(entry.run_command('REPORT')).to eq('Output: 0, 0, SOUTH')
       end
     end
   end
@@ -180,11 +198,11 @@ describe 'Commands' do
       it 'does not turn robot to EAST' do
         entry = Entry.new
 
-        entry.add_command('PLACE', '0', '0', 'NORTH')
+        entry.run_command('PLACE', '0', '0', 'NORTH')
 
-        entry.add_command('RIGHT')
+        entry.run_command('RIGHT')
 
-        expect(entry.add_command('REPORT')).to eq('Output: 0, 0, EAST')
+        expect(entry.run_command('REPORT')).to eq('Output: 0, 0, EAST')
       end
     end
 
@@ -192,11 +210,11 @@ describe 'Commands' do
       it 'does not turn robot to SOUTH' do
         entry = Entry.new
 
-        entry.add_command('PLACE', '0', '0', 'EAST')
+        entry.run_command('PLACE', '0', '0', 'EAST')
 
-        entry.add_command('RIGHT')
+        entry.run_command('RIGHT')
 
-        expect(entry.add_command('REPORT')).to eq('Output: 0, 0, SOUTH')
+        expect(entry.run_command('REPORT')).to eq('Output: 0, 0, SOUTH')
       end
     end
 
@@ -204,11 +222,11 @@ describe 'Commands' do
       it 'does not turn robot to EAST' do
         entry = Entry.new
 
-        entry.add_command('PLACE', '0', '0', 'SOUTH')
+        entry.run_command('PLACE', '0', '0', 'SOUTH')
 
-        entry.add_command('RIGHT')
+        entry.run_command('RIGHT')
 
-        expect(entry.add_command('REPORT')).to eq('Output: 0, 0, WEST')
+        expect(entry.run_command('REPORT')).to eq('Output: 0, 0, WEST')
       end
     end
 
@@ -216,11 +234,11 @@ describe 'Commands' do
       it 'does not turn robot to NORTH' do
         entry = Entry.new
 
-        entry.add_command('PLACE', '0', '0', 'WEST')
+        entry.run_command('PLACE', '0', '0', 'WEST')
 
-        entry.add_command('RIGHT')
+        entry.run_command('RIGHT')
 
-        expect(entry.add_command('REPORT')).to eq('Output: 0, 0, NORTH')
+        expect(entry.run_command('REPORT')).to eq('Output: 0, 0, NORTH')
       end
     end
   end
@@ -229,17 +247,17 @@ describe 'Commands' do
     it 'does not return report' do
       entry = Entry.new
 
-      entry.add_command('PLACE', '0', '0', 'WEST')
+      entry.run_command('PLACE', '0', '0', 'WEST')
 
-      expect(entry.add_command('REPORT')).not_to eq(nil)
+      expect(entry.run_command('REPORT')).not_to eq(nil)
     end
 
     it 'does not return in correct format' do
       entry = Entry.new
 
-      entry.add_command('PLACE', '0', '0', 'WEST')
+      entry.run_command('PLACE', '0', '0', 'WEST')
 
-      expect(entry.add_command('REPORT')).to eq('Output: 0, 0, WEST')
+      expect(entry.run_command('REPORT')).to eq('Output: 0, 0, WEST')
     end
   end
 end
