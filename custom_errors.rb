@@ -17,8 +17,8 @@ module CustomErrors
     end
   end
 
-  class InvalidFacePosition < StandardError
-    def initialize(msg = 'Invalid face position.')
+  class InvalidFaceDirection < StandardError
+    def initialize(msg = 'Invalid face direction.')
       super
     end
   end
@@ -31,6 +31,12 @@ module CustomErrors
 
   class InvalidCommand < StandardError
     def initialize(msg = 'Invalid command. Available commands ara PLACE, MOVE, LEFT, RIGHT and REPORT.')
+      super
+    end
+  end
+
+  class InvalidPlanePosition < StandardError
+    def initialize(msg = 'Invalid plane position.')
       super
     end
   end

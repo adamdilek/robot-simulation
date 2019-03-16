@@ -5,7 +5,7 @@ require './robot'
 require './custom_errors'
 
 Dir[File.join(__dir__, 'commands', '*.rb')].each { |file| require file }
-Dir[File.join(__dir__, 'positions', '*.rb')].each { |file| require file }
+Dir[File.join(__dir__, 'directions', '*.rb')].each { |file| require file }
 
 class Entry
   def initialize
@@ -16,18 +16,24 @@ class Entry
   def run_command(*commands)
     commander = Commander.new(@robot, commands)
 
-    if (@inputs.size.zero? && place_command?(commander.command)) || @inputs.size.positive?
+    return CustomErrors::PlaceRobot.new.message unless robot_placed?(commander.command)
+
+    begin
       result = commander.run
 
       @inputs << commander.command
 
       result
-    else
-      raise CustomErrors::PlaceRobot
+    rescue StandardError => ex
+      ex.message
     end
   end
 
   private
+
+  def robot_placed?(command)
+    (@inputs.size.zero? && place_command?(command)) || @inputs.size.positive?
+  end
 
   def place_command?(command)
     command == Commands::Place.identifier

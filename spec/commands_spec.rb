@@ -42,7 +42,7 @@ describe 'Commands' do
       it 'it accepts another commands' do
         entry = Entry.new
 
-        expect { entry.run_command('MOVE') }.to raise_error(CustomErrors::PlaceRobot)
+        expect(entry.run_command('MOVE')).to eq(CustomErrors::PlaceRobot.new.message)
       end
     end
 
@@ -50,25 +50,25 @@ describe 'Commands' do
       it 'runs with missing arguments' do
         entry = Entry.new
 
-        expect { entry.run_command('PLACE') }.to raise_error(CustomErrors::PlaceCommandMissingArgs)
+        expect(entry.run_command('PLACE')).to eq(CustomErrors::PlaceCommandMissingArgs.new.message)
       end
 
       it 'it runs with invalid face position argument' do
         entry = Entry.new
 
-        expect { entry.run_command('PLACE', '1', '1', 'SOUTHWEST') }.to raise_error(CustomErrors::InvalidFacePosition)
+        expect(entry.run_command('PLACE', '1', '1', 'SOUTHWEST')).to eq(CustomErrors::InvalidFaceDirection.new.message)
       end
 
       it 'runs with invalid table position' do
         entry = Entry.new
 
-        expect { entry.run_command('PLACE', '6', '1', 'WEST') }.to raise_error(CustomErrors::RobotWillFallDown)
+        expect(entry.run_command('PLACE', '6', '1', 'WEST')).to eq(CustomErrors::RobotWillFallDown.new.message)
       end
 
       it 'runs with invalid table position' do
         entry = Entry.new
 
-        expect { entry.run_command('PLACE', '1', '5', 'WEST') }.to raise_error(CustomErrors::RobotWillFallDown)
+        expect(entry.run_command('PLACE', '1', '5', 'WEST')).to eq(CustomErrors::RobotWillFallDown.new.message)
       end
     end
   end
@@ -94,7 +94,7 @@ describe 'Commands' do
 
           entry.run_command('PLACE', '0', '0', 'WEST')
 
-          expect { entry.run_command('MOVE') }.to raise_error(CustomErrors::RobotWillFallDown)
+          expect(entry.run_command('MOVE')).to eq(CustomErrors::RobotWillFallDown.new.message)
         end
       end
     end
@@ -108,7 +108,7 @@ describe 'Commands' do
 
           entry.run_command('PLACE', '0', '4', 'NORTH')
 
-          expect { entry.run_command('MOVE') }.to raise_error(CustomErrors::RobotWillFallDown)
+          expect(entry.run_command('MOVE')).to eq(CustomErrors::RobotWillFallDown.new.message)
         end
       end
     end
@@ -122,7 +122,7 @@ describe 'Commands' do
 
           entry.run_command('PLACE', '4', '0', 'EAST')
 
-          expect { entry.run_command('MOVE') }.to raise_error(CustomErrors::RobotWillFallDown)
+          expect(entry.run_command('MOVE')).to eq(CustomErrors::RobotWillFallDown.new.message)
         end
       end
     end
@@ -136,7 +136,7 @@ describe 'Commands' do
 
           entry.run_command('PLACE', '0', '0', 'SOUTH')
 
-          expect { entry.run_command('MOVE') }.to raise_error(CustomErrors::RobotWillFallDown)
+          expect(entry.run_command('MOVE')).to eq(CustomErrors::RobotWillFallDown.new.message)
         end
       end
     end

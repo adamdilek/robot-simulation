@@ -1,12 +1,12 @@
-module Positions
+module Directions
   class WEST < Base
     class << self
       def right
-        Positions::NORTH
+        Directions::NORTH
       end
 
       def left
-        Positions::SOUTH
+        Directions::SOUTH
       end
 
       def forward
@@ -19,5 +19,5 @@ module Positions
     end
   end
 
-  Position.register_position(Positions::WEST.identifier, Positions::WEST)
+  Position.register_direction(Directions::WEST.identifier, Directions::WEST)
 end

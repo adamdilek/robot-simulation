@@ -3,9 +3,11 @@ Dir[File.join(__dir__, './positions/facing/', '*.rb')].each { |file| require fil
 class Position
   attr_accessor :x, :y, :f
 
-  FACING_POSITIONS = {}
+  DIRECTIONS = {}
 
-  def initialize(table = Table.new)
+  def initialize(table)
+    raise StandardError, 'Invalid table class' unless table.is_a?(Table)
+
     @table = table
   end
 
@@ -26,14 +28,14 @@ class Position
   end
 
   def f=(value)
-    raise CustomErrors::InvalidFacePosition if value.nil?
+    raise CustomErrors::InvalidFaceDirection if value.nil?
 
-    raise CustomErrors::InvalidFacePosition unless FACING_POSITIONS.map{ |_k,v| v }.include?(value)
+    raise CustomErrors::InvalidFaceDirection unless DIRECTIONS.map{ |_k,v| v }.include?(value)
 
     @f = value
   end
 
-  def self.register_position(position, klass)
-    FACING_POSITIONS[position] = klass
+  def self.register_direction(direction, klass)
+    DIRECTIONS[direction] = klass
   end
 end

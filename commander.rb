@@ -17,6 +17,8 @@ class Commander
     klass.new(@robot, @args).execute
   end
 
+  private
+
   def command_klass(identifier)
     Commands::Base.descendants.each do |kl|
       return kl if kl.identifier == identifier

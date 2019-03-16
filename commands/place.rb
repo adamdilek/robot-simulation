@@ -5,11 +5,11 @@ module Commands
     end
 
     def execute
-      old_position = @robot.position
+      old_position = @robot.position.dup
 
       @robot.position.x = @args[0]
       @robot.position.y = @args[1]
-      @robot.position.f = Position::FACING_POSITIONS[@args[2]]
+      @robot.position.f = Position::DIRECTIONS[@args[2]]
     rescue StandardError => ex
       @robot.position = old_position
       raise ex

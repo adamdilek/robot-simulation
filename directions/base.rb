@@ -1,4 +1,4 @@
-module Positions
+module Directions
   class Base
     class << self
       def identifier
