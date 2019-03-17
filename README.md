@@ -16,6 +16,8 @@ bundle exec rspec
 
 ## Example Data
 
+These examples can be find in example-data.txt
+
 INPUTS
 
 ```
