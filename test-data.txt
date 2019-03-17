@@ -1,5 +1,5 @@
 All examples must be run in a separate sessions.
-
+To create a new session just type ruby main.rb in root.
 
 Example 1)
 
