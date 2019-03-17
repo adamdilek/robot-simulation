@@ -16,7 +16,28 @@ bundle exec rspec
 
 ## Example Data
 
-INPUT
+INPUTS
+
+```
+PLACE 1,1,EAST
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+MOVE
+REPORT
+```
+
+OUTPUT
+
+```
+Output: 4, 1, EAST
+```
+
+### ----------------------
+
+INPUTS
 
 ```
 PLACE 3,3,WEST
@@ -36,7 +57,7 @@ Output: 1, 1, NORTH
 
 ### ----------------------
 
-INPUT
+INPUTS
 
 ```
 PLACE 1,3,WEST
@@ -53,7 +74,7 @@ The robot going to fall down. We did not move the robot anywhere.
 ### ----------------------
 
 
-INPUT
+INPUTS
 
 ```
 MOVE
@@ -67,7 +88,7 @@ You should first place robot on the table.
 
 ### ----------------------
 
-INPUT
+INPUTS
 ```
 PLACE 0,0,NORTH
 MOVE
@@ -81,7 +102,7 @@ Output: 0, 1, NORTH
 
 ### ----------------------
 
-INPUT
+INPUTS
 ```
 PLACE 0,0,NORTH
 LEFT
