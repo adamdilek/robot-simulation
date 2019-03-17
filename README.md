@@ -19,6 +19,26 @@ bundle exec rspec
 INPUT
 
 ```
+PLACE 3,3,WEST
+LEFT
+MOVE
+LEFT
+MOVE
+PLACE 1,1,NORTH
+REPORT
+```
+
+OUTPUT
+
+```
+Output: 1, 1, NORTH
+```
+
+### ----------------------
+
+INPUT
+
+```
 PLACE 1,3,WEST
 MOVE
 MOVE
