@@ -1,4 +1,21 @@
 module Directions
+  #
+  #
+  #                  NORTH(+y)
+  #                     |
+  #                     |
+  #                     |
+  #                     |
+  #                     |(0,0)
+  #  WEST(-x)-----------|----------EAST(+x)
+  #                     |
+  #                     |
+  #                     |
+  #                     |
+  #                     |
+  #                  SOUTH(-y)
+  #
+  #
   class Base
     class << self
       def identifier

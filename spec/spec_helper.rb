@@ -14,9 +14,9 @@
 #
 
 
-Dir[File.join(File.dirname(__FILE__), "../*.rb")].each { |f| require f }
-
-Dir[File.join(__dir__, '../positions/facing/', '*.rb')].each { |file| require file }
+Dir[File.join(File.dirname(__FILE__), "../*.rb")].each do |f|
+  require f unless f.include?('main.rb')
+end
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

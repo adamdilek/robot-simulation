@@ -1,6 +1,4 @@
 module Directions
-  # EAST class responsible for detecting left, right and
-  # movement position by itself.
   class EAST < Base
     class << self
       def right

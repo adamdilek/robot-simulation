@@ -7,7 +7,9 @@ require './custom_errors'
 Dir[File.join(__dir__, 'commands', '*.rb')].each { |file| require file }
 Dir[File.join(__dir__, 'directions', '*.rb')].each { |file| require file }
 
-class Entry
+class Engine
+  attr_reader :inputs
+
   def initialize
     @robot = Robot.new
     @inputs = []
@@ -16,9 +18,9 @@ class Entry
   def run_command(*commands)
     commander = Commander.new(@robot, commands)
 
-    return CustomErrors::PlaceRobot.new.message unless robot_placed?(commander.command)
-
     begin
+      raise CustomErrors::PlaceRobot unless robot_placed?(commander.command)
+
       result = commander.run
 
       @inputs << commander.command

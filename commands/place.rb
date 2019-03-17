@@ -2,6 +2,7 @@ module Commands
   class Place < Base
     def validate_args
       raise CustomErrors::PlaceCommandMissingArgs unless @args.size == 3
+      raise CustomErrors::InvalidFaceDirection if Position::DIRECTIONS[@args[2]].nil?
     end
 
     def execute

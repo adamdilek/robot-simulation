@@ -30,12 +30,12 @@ class Position
   def f=(value)
     raise CustomErrors::InvalidFaceDirection if value.nil?
 
-    raise CustomErrors::InvalidFaceDirection unless DIRECTIONS.map{ |_k,v| v }.include?(value)
+    raise CustomErrors::InvalidFaceDirection unless DIRECTIONS.map(&:last).include?(value)
 
     @f = value
   end
 
   def self.register_direction(direction, klass)
-    DIRECTIONS[direction] = klass
+    DIRECTIONS[direction] = klass if klass.superclass == Directions::Base
   end
 end

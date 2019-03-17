@@ -3,7 +3,7 @@ module Commands
 
     REGISTERED_COMMANDS = {}
 
-    def initialize(robot, args)
+    def initialize(robot, args = [])
       @args = args
 
       @robot = robot
@@ -12,10 +12,6 @@ module Commands
     end
 
     def validate_args; end
-
-    def self.descendants
-      ObjectSpace.each_object(Class).select { |klass| klass < self }
-    end
 
     def self.identifier
       name.to_s.upcase.split('::').last
@@ -26,7 +22,7 @@ module Commands
     end
 
     def self.register_command(command, klass)
-      REGISTERED_COMMANDS[command] = klass
+      REGISTERED_COMMANDS[command] = klass if klass.superclass == Commands::Base
     end
   end
 end
