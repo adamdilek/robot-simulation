@@ -49,7 +49,7 @@ You should first place robot on the table.
 
 INPUT
 ```
-PLACE, 0,0,NORTH
+PLACE 0,0,NORTH
 MOVE
 REPORT
 ``` 
