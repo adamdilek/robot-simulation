@@ -16,8 +16,6 @@ bundle exec rspec
 
 ## Example Data
 
-* Example 1
-
 INPUT
 
 ```
@@ -32,7 +30,7 @@ OUTPUT
 The robot going to fall down. We did not move the robot anywhere.
 ```
 
-* Example 2
+###----------------------
 
 
 INPUT
@@ -47,7 +45,7 @@ OUTPUT
 You should first place robot on the table.
 ```
 
-* Example 3
+###----------------------
 
 INPUT
 ```
@@ -61,7 +59,7 @@ OUTPUT
 Output: 0, 1, NORTH
 ```
 
-* Example 4
+###----------------------
 
 INPUT
 ```
