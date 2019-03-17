@@ -30,7 +30,7 @@ OUTPUT
 The robot going to fall down. We did not move the robot anywhere.
 ```
 
-###----------------------
+### ----------------------
 
 
 INPUT
@@ -45,7 +45,7 @@ OUTPUT
 You should first place robot on the table.
 ```
 
-###----------------------
+### ----------------------
 
 INPUT
 ```
@@ -59,7 +59,7 @@ OUTPUT
 Output: 0, 1, NORTH
 ```
 
-###----------------------
+### ----------------------
 
 INPUT
 ```
