@@ -18,17 +18,13 @@ class Engine
   def run_command(*commands)
     commander = Commander.new(@robot, commands)
 
-    begin
-      raise CustomErrors::PlaceRobot unless robot_placed?(commander.command)
+    raise CustomErrors::PlaceRobot unless robot_placed?(commander.command)
 
-      result = commander.run
+    result = commander.run
 
-      @inputs << commander.command
+    @inputs << commander.command
 
-      result
-    rescue StandardError => ex
-      ex.message
-    end
+    result
   end
 
   private

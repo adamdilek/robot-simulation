@@ -18,7 +18,7 @@ module CustomErrors
   end
 
   class InvalidFaceDirection < StandardError
-    def initialize(msg = 'Invalid face direction.')
+    def initialize(msg = 'Invalid face direction. Available directions are NORTH,EAST,SOUTH,WEST')
       super
     end
   end
